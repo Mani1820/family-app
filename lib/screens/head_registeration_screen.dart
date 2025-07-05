@@ -3,6 +3,7 @@ import 'package:family_tree/screens/Tab/tab_screen.dart';
 import 'package:family_tree/utils/common_button.dart';
 import 'package:family_tree/utils/common_dropdownbutton.dart';
 import 'package:family_tree/utils/common_textfield.dart';
+import 'package:family_tree/utils/sharedpreference_util.dart';
 import 'package:family_tree/utils/validators.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,7 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
 
   String? selectedGender;
   String? selectedMareitalStatus;
+  String? samajName;
 
   List<DropdownMenuItem> genderItems = [
     DropdownMenuItem(value: 'male', child: Text('male')),
@@ -67,7 +69,11 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
     DropdownMenuItem(value: 'single', child: Text('single')),
     DropdownMenuItem(value: 'divorced', child: Text('divorced')),
   ];
-
+  List<DropdownMenuItem> samajItems = [
+    DropdownMenuItem(value: 'samaj A', child: Text('samaj A')),
+    DropdownMenuItem(value: 'samaj B', child: Text('samaj B')),
+    DropdownMenuItem(value: 'samaj C', child: Text('samaj C')),
+  ];
   void nextPage() {
     if (currentPage < totalPages - 1) {
       pageController.nextPage(
@@ -75,6 +81,30 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
         curve: Curves.easeInOut,
       );
     }
+  }
+
+  void _showSnackBar(String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Future<void> saveName() async {
+    await SharedpreferenceUtil.setString('UserName', nameController.text);
+  }
+
+  Future<void> saveNumber() async {
+    await SharedpreferenceUtil.setString(
+      'phoneNumber',
+      phoneNumberController.text,
+    );
+  }
+
+  Future<void> saveEmail() async {
+    await SharedpreferenceUtil.setString('email', emailController.text);
+  }
+
+  Future<void> saveSamajName() async {
+    await SharedpreferenceUtil.setString('samajName', samajName!);
   }
 
   @override
@@ -146,27 +176,24 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
               if (currentPage == 0) {
                 if (formKey1.currentState!.validate() &&
                     selectedGender != null &&
-                    selectedMareitalStatus != null) {
+                    selectedMareitalStatus != null &&
+                    samajName != null) {
                   nextPage();
+                  saveName();
+                  saveSamajName();
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Please fill all required fields in Personal Details.',
-                      ),
-                    ),
+                  _showSnackBar(
+                    'Please fill all required fields in Personal Details.',
                   );
                 }
               } else if (currentPage == 1) {
                 if (formKey2.currentState!.validate()) {
+                  saveEmail();
+                  saveNumber();
                   nextPage();
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Please fill all required fields in Contact Details.',
-                      ),
-                    ),
+                  _showSnackBar(
+                    'Please fill all required fields in Contact Details.',
                   );
                 }
               } else if (currentPage == 2) {
@@ -177,12 +204,8 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
                     (route) => false,
                   );
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Please fill all required fields in Address Details.',
-                      ),
-                    ),
+                  _showSnackBar(
+                    'Please fill all required fields in Address Details.',
                   );
                 }
               }
@@ -271,6 +294,7 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
 
             CommonDropdownbutton(
               lable: Constants.gender,
+              hintText: 'Select Your Gender',
               items: genderItems,
               onChanged: (value) {
                 setState(() {
@@ -280,10 +304,21 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
             ),
             CommonDropdownbutton(
               lable: Constants.maritalStatus,
+              hintText: 'Select Your Marital Status',
               items: mareitalItems,
               onChanged: (value) {
                 setState(() {
                   selectedMareitalStatus = value;
+                });
+              },
+            ),
+            CommonDropdownbutton(
+              lable: Constants.samajName,
+              hintText: 'Select Your Samaj Name',
+              items: samajItems,
+              onChanged: (value) {
+                setState(() {
+                  samajName = value;
                 });
               },
             ),
@@ -293,12 +328,7 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
               controller: ocupationController,
               validator: occupationValidator,
             ),
-            CommonTextfield(
-              text: Constants.samajName,
-              hintText: 'Enter your samaj name',
-              controller: samajNameController,
-              validator: samajValidator,
-            ),
+
             CommonTextfield(
               text: Constants.qualification,
               hintText: 'Enter your qualification',
@@ -315,7 +345,11 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CircleAvatar(radius: 60, backgroundColor: Color(0xFFf7e6ed)),
+        CircleAvatar(
+          radius: 60,
+          backgroundColor: Color(0xFFf7e6ed),
+          child: Icon(Icons.camera_alt_outlined, size: 50),
+        ),
         Text(
           Constants.uploadProfile,
           style: TextStyle(color: ColorConstant.secondaryTextColor),
@@ -333,7 +367,7 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
             Text(Constants.personal, style: appBarStyle()),
             CommonTextfield(
               text: Constants.birthDate,
-              hintText: 'e.g, 20-02-2025',
+              hintText: 'e.g, 2025-01-31',
               controller: birthdayController,
               validator: birthDateValidator,
             ),
@@ -406,10 +440,10 @@ class _HeadRegisterationScreenState extends State<HeadRegisterationScreen> {
             ),
             CommonTextfield(
               text: Constants.buildingName,
-              hintText: 'e.g, 5/70',
+              hintText: 'Enter building name',
               controller: buildingNameController,
               validator: buildingNameValidator,
-              keyboardType: TextInputType.numberWithOptions(decimal: false),
+              keyboardType: TextInputType.name,
             ),
             CommonTextfield(
               text: Constants.street,

@@ -1,3 +1,4 @@
+// import 'package:family_tree/screens/Tab/tab_screen.dart';
 import 'package:family_tree/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: Constants.appName,
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
+      // home: TabScreen(),
     );
   }
 }

@@ -55,3 +55,48 @@ TextStyle appBarStyle() {
     fontFamily: Constants.appFont,
   );
 }
+
+TextStyle containerTitle() {
+  return const TextStyle(
+    color: ColorConstant.primaryTextcolor,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+    fontFamily: Constants.appFont,
+  );
+}
+
+TextStyle containerContent(Color color) {
+  return TextStyle(
+    color: color,
+    fontSize: 25,
+    fontWeight: FontWeight.w400,
+    fontFamily: Constants.appFont,
+  );
+}
+
+TextStyle profileContainerTitle() {
+  return const TextStyle(
+    color: ColorConstant.primaryColor,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+    fontFamily: Constants.appFont,
+  );
+}
+
+TextStyle quickActionTitile(){
+  return const TextStyle(
+    color: ColorConstant.primaryTextcolor,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontFamily: Constants.appFont,
+  );
+}
+
+TextStyle quickActionSubTitile(){
+  return const TextStyle(
+    color: ColorConstant.secondaryTextColor,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+    fontFamily: Constants.appFont,
+  );
+}

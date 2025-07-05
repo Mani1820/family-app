@@ -10,6 +10,6 @@ class FamilyTree extends StatefulWidget {
 class _FamilyTreeState extends State<FamilyTree> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(child: Text("Family Tree screen"));
   }
 }

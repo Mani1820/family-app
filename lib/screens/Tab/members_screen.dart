@@ -10,6 +10,6 @@ class MembersScreen extends StatefulWidget {
 class _MembersScreenState extends State<MembersScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(child: Text("Members Screen"));
   }
 }

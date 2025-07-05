@@ -60,4 +60,25 @@ class Constants {
   static const String next = "Next";
 
   static const String register = "Register";
+
+  // TabBar
+
+  static const String home = "Home";
+  static const String members = "Members";
+  static const String familyTree = "family tree";
+  static const String download = "Download";
+
+  static const String totalMembers = "Total Members";
+  static const String recentMember = "Recent Member";
+
+  static const String quickAction = "Quick Actions";
+  static const String viewMembers = "View Members";
+  static const String viewMemberDetails =
+      "See all your registered family members";
+  static const String addMembers = "Add Members";
+  static const String addMemberDetails = "Register a new family member";
+  static const String familyTrees = "Family Tree";
+  static const String familyTreeDetails = "Vizualize your family tree";
+  static const String export = "Export Data";
+  static const String exportDetails = "Download your family information";
 }

@@ -3,10 +3,17 @@ import 'package:family_tree/utils/common_textstyles.dart';
 import 'package:flutter/material.dart';
 
 class CommonDropdownbutton extends StatelessWidget {
-  const CommonDropdownbutton({super.key, required this.lable, required this.items, this.onChanged});
+  const CommonDropdownbutton({
+    super.key,
+    required this.lable,
+    required this.items,
+    this.onChanged,
+    required this.hintText,
+  });
 
   final String lable;
-  final List<DropdownMenuItem> items; 
+  final String hintText;
+  final List<DropdownMenuItem> items;
   final ValueChanged<dynamic>? onChanged;
 
   @override
@@ -37,7 +44,7 @@ class CommonDropdownbutton extends StatelessWidget {
                   color: ColorConstant.textfieldBorderColor,
                 ),
               ),
-              hintText: 'Select Your Gender',
+              hintText: hintText,
               hintStyle: TextStyle(color: ColorConstant.textfieldHintColor),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
