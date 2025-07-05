@@ -81,4 +81,31 @@ class Constants {
   static const String familyTreeDetails = "Vizualize your family tree";
   static const String export = "Export Data";
   static const String exportDetails = "Download your family information";
+
+  //export data
+  static const String selectFormat = "Select Export Format";
+  static const String selctFormatDetails =
+      "Choose how you want to export your family tree data";
+  static const String exportAsPDF = "PDF document";
+  static const String exportAsPDFDetails =
+      "Export your family tree as a PDF document";
+  static const String exportAsCSV = "CSV Spreadsheet";
+  static const String exportAsCSVDetails =
+      "Export your family tree as a CSV file";
+  static const String exportAsPNG = "Image (PNG)";
+  static const String exportAsPNGDetails =
+      "Export your family tree as a High Quality image";
+  static const String exportOptions = "Export Options";
+  static const String includePhotos = "Include Profile Photos";
+  static const String includeContactInfo = "Include Contact Information";
+  static const String includeAddress = "Include Address Details";
+  static const String includeBirthDate = "Include Birth Date";
+  static const String exportFamilyTree = "Export Family Tree";
+
+  //members screen
+  static const String familyHead = "Family Head";
+  static const String familyMember = "Other Family Member";
+  static const String clickToAddMember =
+      "Click here to add new family members to your family tree";
+  static const String addMember = "Add new member";
 }

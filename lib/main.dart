@@ -1,5 +1,5 @@
-// import 'package:family_tree/screens/Tab/tab_screen.dart';
-import 'package:family_tree/screens/login_screen.dart';
+import 'package:family_tree/screens/Tab/tab_screen.dart';
+// import 'package:family_tree/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/constants.dart';
@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: Constants.appName,
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
-      // home: TabScreen(),
+      // home: LoginScreen(),
+      home: TabScreen(),
     );
   }
 }
