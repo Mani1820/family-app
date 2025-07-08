@@ -2,6 +2,8 @@ import 'package:family_tree/constants/color_constants.dart';
 import 'package:family_tree/utils/common_textstyles.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/constants.dart';
+
 class CommonDropdownbutton extends StatelessWidget {
   const CommonDropdownbutton({
     super.key,
@@ -45,7 +47,12 @@ class CommonDropdownbutton extends StatelessWidget {
                 ),
               ),
               hintText: hintText,
-              hintStyle: TextStyle(color: ColorConstant.textfieldHintColor),
+              hintStyle: TextStyle(
+                color: ColorConstant.textfieldHintColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                fontFamily: Constants.appFont,
+              ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(

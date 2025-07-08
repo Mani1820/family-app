@@ -108,4 +108,15 @@ class Constants {
   static const String clickToAddMember =
       "Click here to add new family members to your family tree";
   static const String addMember = "Add new member";
+  static const String firstName = "First Name";
+static const String lastName = "Last Name";
+static const String ages = "Age";
+static const String dateOfBirth = "Date of Birth";
+static const String genders = "Gender";
+static const String maritalStatus1 = "Marital Status";
+static const String email = "Email";
+static const String phoneNumbers = "Phone Number";
+static const String relationship = "Relationship";
+static const String status = "Invitation Status";
+static const String samajName1 = "Samaj Name";
 }

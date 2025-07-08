@@ -12,6 +12,8 @@ class CommonTextfield extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.validator,
+    this.onTap,
+    this.readOnly,
   });
   final String text;
   final String hintText;
@@ -20,6 +22,8 @@ class CommonTextfield extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final String? Function(String?)? validator;
+  final VoidCallback? onTap;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +48,14 @@ class CommonTextfield extends StatelessWidget {
             controller: controller,
             validator: validator,
             cursorColor: Colors.blue,
+            readOnly: readOnly ?? false,
+            onTap: onTap,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: textfieldHint(),
               prefixIcon: Icon(prefixIcon),
               suffixIcon: Icon(suffixIcon),
-              
+
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
@@ -58,6 +64,7 @@ class CommonTextfield extends StatelessWidget {
               ),
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
+
                 borderSide: BorderSide(
                   color: ColorConstant.textfieldBorderColor,
                 ),

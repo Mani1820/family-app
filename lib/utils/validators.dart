@@ -201,3 +201,22 @@ String? pincodeValidator(String? value) {
   }
   return null;
 }
+
+String? firstNameValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter first name';
+  }
+  return null;
+}
+String? lastNameValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter last name';
+  }
+  return null;
+}
+String? relationValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter relation';
+  }
+  return null;
+}

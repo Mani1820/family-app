@@ -3,6 +3,9 @@ import 'package:family_tree/constants/constants.dart';
 import 'package:family_tree/model/family_members_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/common_textstyles.dart';
+import '../add_members_screen.dart';
+
 class MembersScreen extends StatefulWidget {
   const MembersScreen({super.key});
 
@@ -12,17 +15,37 @@ class MembersScreen extends StatefulWidget {
 
 class _MembersScreenState extends State<MembersScreen> {
   @override
+  void initState() {
+    familyMembers;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Members'),
+        title: Text('Members', style: appBarStyle()),
         centerTitle: true,
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (_) => AddMembersScreen(
+                        onMemberAdded: (member) {
+                          setState(() {
+                            familyMembers.add(member);
+                          });
+                        },
+                      ),
+                ),
+              );
+            },
             icon: Icon(
               Icons.person_add_alt_1_rounded,
               color: ColorConstant.primaryColor,
@@ -43,6 +66,7 @@ class _MembersScreenState extends State<MembersScreen> {
               relationship: Constants.familyHead,
               status: 'active',
               isHead: true,
+              containerbackgroundColor: Colors.white,
             ),
             _buildSectionTitle(Constants.familyMember),
             ListView.builder(
@@ -51,11 +75,16 @@ class _MembersScreenState extends State<MembersScreen> {
               itemCount: familyMembers.length,
               itemBuilder: (context, index) {
                 final member = familyMembers[index];
+                bool isEven = index % 2 == 0;
                 return _buildMemberCard(
                   size: size,
                   name: '${member.firstName} ${member.lastName}',
                   relationship: member.relationship,
                   status: member.status,
+                  containerbackgroundColor:
+                      isEven
+                          ? ColorConstant.lightGreenColor
+                          : ColorConstant.lightPrimaryColor,
                 );
               },
             ),
@@ -85,9 +114,10 @@ class _MembersScreenState extends State<MembersScreen> {
     required String relationship,
     required dynamic status,
     bool isHead = false,
+    required Color containerbackgroundColor,
   }) {
     String statusText = '';
-    Color backgroundColor = Colors.grey.shade200;
+    Color backgroundColor = const Color.fromARGB(255, 222, 82, 82);
     Color textColor = Colors.black;
 
     if (isHead) {
@@ -117,7 +147,7 @@ class _MembersScreenState extends State<MembersScreen> {
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: containerbackgroundColor,
           borderRadius: BorderRadius.circular(12.0),
           boxShadow: [
             BoxShadow(
